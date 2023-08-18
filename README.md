@@ -1,2 +1,2 @@
 # gcc-almost-std
-Just some C files
+Just some (maybe) useful C files
