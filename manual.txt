@@ -1,0 +1,69 @@
+This is a manual for the following header files in the library directory in the gcc-almost-std repositiory:
+* stdbit.h
+* stdround.h
+------------------------------------------------------------------------------
+stdbit.h:
+
+bool readbit(unsigned long foo, int index)  
+  readbit() returns a boolean value of the index of the variable foo.
+  Example: if foo is equvilent to 173 and the index is 3:
+  Value of foo: 10101101 (173 in binary)
+  Index of foo: 76543210
+                    ^
+  Then the return value will be true
+
+void writebit(unsigned long* foo, int index, bool boo)
+  writebit() writes the boolean value boo to the index of the variable foo.
+  Example: if foo is equivilent to 3, the index is 5 and boo is true:
+  Old value of foo: 00000011 (3 in binary)
+  Index of foo:     76543210
+                      ^
+  New value of foo: 00100011 (35 in binary)
+                      ^
+  Since the index is 5, this operation could been seen the same as foo += 1 << 5
+  Or foo += (2^5) in decimal terms
+  
+unsigned long readbits(unsigned long foo, int start, int end)
+  readbits() loops readbit() (end - start) times and returns the value of those particular bits.
+  This starts at the index of start and ends at the index of end
+	
+void writebits(unsigned long* foo, int start, int end, bool boo)
+  writebits() liips writebit() (end - start) times and writes the value of boo (end - start) times
+  This starts at the index of start and ends at the index of end
+
+bool freadbit(char foofile[], unsigned long index)
+  freadbit() returns a specific bit from a file based on the index.
+  Example: if foofile[] is set to "/path/to/file" and the index is 7:
+  Preexisting contents of /path/to/file:  00101110
+  Indexing of /path/to/file:              01234567
+	                                             ^
+  Then the return value will be false
+  !! IMPORTANT !!: ALL VALUES RETRIVED FROM /path/to/file FILE WILL BE READ FROM LEFT TO RIGHT
+  So, in the example above, index 7 is the most significant bit (128)
+	
+void fwritebit(char foofile[],unsigned long index,bool boo)
+  fwritebit() writes a bit to a file based on the binary value inputted as well as the index.
+  Example: foofile[] is set to "/path/to/file", the index is 4 and the boolean value (boo) is false
+  Preexisting contents of /path/to/file: 00101110
+  Indexing of /path/to/file:             01234567
+                                             ^
+  New contents of /path/to/file:         00100110
+  The value at index 4 is set from true to false
+  !! IMPORTANT !!: ALL VALUES WRITTEN TO /path/to/file FILE WILL BE WROTE FROM LEFT TO RIGHT
+  Example: 00101001 will to written as 10010100 in /path/to/file (assuming the user did a loop)
+           01234567                    76543210
+------------------------------------------------------------------------------
+stdround.h:
+
+unsigned long roundd(unsigned long foo, unsigned long val) 
+  roundd() returns foo rounded down to the nearest val
+  Example: foo is 25 and val is 8
+  The nearest integer multiple of 8 to 25 that is less than 25 is 24
+  Then the return value will be 24
+  
+unsigned long roundu(unsigned long foo, unsigned long val)
+  roundu() returns foo rounded up to the nearest val
+  Example: foo is 200 and val is 3
+  The nearest integer multiple of 3 to 200 that is greater than 200 is 201
+  Then the return value will be 201
+------------------------------------------------------------------------------
