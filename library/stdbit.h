@@ -16,7 +16,7 @@ void writebit(unsigned long* foo, int index, bool boo)
 
 unsigned long readbits(unsigned long foo,int start,int end)
 {
-	unsigned long long one = 0; 
+	unsigned long one = 0; 
 	for(int i = start; i < end; i++) if (foo & ( 1 << i)) one += 1 << i;
 	return one;
 }
