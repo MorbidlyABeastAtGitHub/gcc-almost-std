@@ -1,6 +1,6 @@
 # gcc-almost-std
 Just some (maybe) useful C files
-
-Rememeber to chmod +x the install.sh file once downloaded and read the manual on how to use the library
-
-Go modify this and use it how you want idc
+## Installation
+cd gcc-almost-std
+chmod +x install.sh
+sudo ./install.sh
