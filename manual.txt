@@ -1,6 +1,7 @@
 This is a manual for the following header files in the library directory in the gcc-almost-std repositiory:
 * stdbit.h
 * stdround.h
+* tetrate.h
 ------------------------------------------------------------------------------
 stdbit.h:
 
@@ -79,4 +80,17 @@ unsigned long roundu(unsigned long foo, unsigned long val)
   Example: foo is 200 and val is 3
   The nearest integer multiple of 3 to 200 that is greater than 200 is 201
   Then the return value will be 201
+------------------------------------------------------------------------------
+tetrate.h:
+
+long double tetrate (long double foo, long double exp)
+  tetrate() returns foo to the tetration of exp
+  Example: foo is 3 and exp is 2
+  This is what it would like like mathematically:
+        foo))
+     (foo^
+  (foo^
+  The math is done from top-to-bottom
+  foo is grown exponentially two times, against itself
+  Output: 7625597484987 or 7.62559748499e+12
 ------------------------------------------------------------------------------
