@@ -3,30 +3,27 @@
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
-bool readbit(unsigned long foo, int index) 
-{
-	return(foo & (1 << index));
-}
 
-void writebit(unsigned long* foo, int index, bool boo)
+bool readbit (unsigned long foo, unsigned int index) 
+{ return(foo & (1 << index)); }
+
+void writebit(unsigned long* foo, unsigned int index, bool boo)
 {
 	if(boo && !(*foo & (1 << index))) *foo += 1 << index;
-	if(!boo && (*foo & (1 << index))) *foo -= 1 << index;
+	if(!boo && (*foo & (1 << index ))) *foo -=1 << index;
 }
 
-unsigned long readbits(unsigned long foo, int start, int end)
+unsigned long readbits(unsigned long foo, unsigned int start, unsigned int end)
 {
 	unsigned long one = 0; 
 	for(int i = start; i < end; i++) if (foo & ( 1 << i)) one += 1 << i;
 	return one;
 }
 
-void writebits(unsigned long* foo,int start, int end, bool boo)
-{
-	for(int i = start; i < end + 1; i++) writebit(foo, i, boo);
-}
+void writebits(unsigned long* foo, unsigned int start, unsigned int end,bool boo)
+{ for(int i = start; i < end + 1; i++) writebit(foo, i, boo); }
 
-bool freadbit(char foofile[], unsigned long index)
+bool freadbit(char foofile[],unsigned long index)
 {
 	FILE* foo = fopen(foofile, "rb");
 	unsigned char boo;
@@ -43,9 +40,9 @@ bool freadbit(char foofile[], unsigned long index)
 		return boo;
 }
 
-void fwritebit(char foofile[], unsigned long index, bool boo)
+void fwritebit(char foofile[],unsigned long index,bool boo)
 {
-	FILE* foo = fopen(foofile, "ab");
+	FILE*foo=fopen(foofile, "ab");
 	
 	if (!ftell(foo))
 	{
@@ -71,11 +68,17 @@ void fwritebit(char foofile[], unsigned long index, bool boo)
 			fseek(foo, (index / 8), SEEK_SET);
 			unsigned char i = fgetc(foo);
 			fseek(foo, (index / 8), SEEK_SET);
-			writebit(&i, index - ((index / 8) * 8), boo);
+			writebit((unsigned long*)(&i), index - ((index / 8) * 8), boo);
 			fputc(i, foo);
 		}
 	}
 	fclose(foo);
 }
+void flip (unsigned long* foo)
+{ *foo = !(*foo); }
 
-
+void flipbit (unsigned long *foo, unsigned int index)
+{
+	if(*foo & (1 << index)) *foo -= 1 << index;
+	else *foo += 1 << index;
+}
