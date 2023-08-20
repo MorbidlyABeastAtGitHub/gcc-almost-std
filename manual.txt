@@ -7,7 +7,7 @@ stdbit.h:
 bool readbit(unsigned long foo, int index)  
   readbit() returns a boolean value of the index of the variable foo.
   Example: if foo is equvilent to 173 and the index is 3:
-  Value of foo: 10101101 (173 in binary)
+  Value of foo: 10101101
   Index of foo: 76543210
                     ^
   Then the return value will be true
@@ -52,6 +52,19 @@ void fwritebit(char foofile[],unsigned long index,bool boo)
   !! IMPORTANT !!: ALL VALUES WRITTEN TO /path/to/file FILE WILL BE WROTE FROM LEFT TO RIGHT
   Example: 00101001 will to written as 10010100 in /path/to/file (assuming the user did a loop)
            01234567                    76543210
+
+void flip(unsigned long* foo)
+  flip() does a binary bitflip to every bit in foo
+  Example: variable foo is set to 178
+  Preexisting value of foo: 10110010
+  New value of foo:         01001101
+
+void flipbit (unsigned long *foo, unsigned int index)
+  flipbit() does a binary bitflip to a particular bit in foo, the index bit
+  Example: variable foo is set to 255 and the index is 3
+  Preexisting value of foo: 11111111
+  Indexing of foo:          01234567
+  New value of foo:         11101111
 ------------------------------------------------------------------------------
 stdround.h:
 
